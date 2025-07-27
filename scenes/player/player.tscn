@@ -1,13 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpqk2lvsfb73i"]
+[gd_scene load_steps=9 format=3 uid="uid://cpqk2lvsfb73i"]
 
 [ext_resource type="Texture2D" uid="uid://cu83lral15svl" path="res://graphics/player/player.png" id="1_1kbk7"]
 [ext_resource type="Script" uid="uid://bl3kpf83x04i6" path="res://scenes/player/player.gd" id="1_gqjuk"]
+[ext_resource type="Texture2D" uid="uid://vwqlm1pd0lfd" path="res://graphics/decals/white.png" id="3_gmlin"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gmlin"]
+polygon = PackedVector2Array(-44, -41, -47, -29, -53, -20, -53, -8, -53, 5, -49, 13, -47, 16, -44, 17, -44, 20, -46, 22, -42, 32, -38, 35, -36, 36, -33, 42, -31, 46, -28, 53, -25, 59, -11, 62, 0, 61, 10, 60, 24, 54, 31, 49, 44, 46, 49, 43, 51, 41, 57, 43, 69, 43, 67, 47, 65, 49, 69, 55, 101, 55, 104, 50, 103, 47, 106, 45, 111, 42, 115, 37, 120, 38, 127, 39, 129, 38, 128, 34, 129, 32, 131, 34, 135, 35, 139, 31, 141, 24, 140, 14, 136, 7, 131, 10, 129, 10, 130, 7, 132, 5, 129, 3, 119, 3, 117, 2, 116, -1, 105, -3, 95, -10, 86, -9, 68, -25, 56, -28, 50, -36, 51, -40, 43, -47, 35, -59, 16, -59, 3, -58, -4, -55, -10, -56, -19, -51, -21, -46, -35, -45, -40, -43)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1kbk7"]
 radius = 61.2046
 
+[sub_resource type="Gradient" id="Gradient_gmlin"]
+offsets = PackedFloat32Array(0, 0.986301)
+colors = PackedColorArray(0.96511, 1, 0.998919, 1, 0, 0.729412, 0.705882, 0.658824)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lvxji"]
+gradient = SubResource("Gradient_gmlin")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lvxji"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 10.35
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 184.87
+initial_velocity_max = 568.2
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+color = Color(0.72911, 0.999164, 0.905424, 0.694118)
+color_ramp = SubResource("GradientTexture1D_lvxji")
+
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 31
 script = ExtResource("1_gqjuk")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_gmlin")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(44, 2)
@@ -15,6 +42,7 @@ rotation = 1.5708
 texture = ExtResource("1_1kbk7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource("CircleShape2D_1kbk7")
 
 [node name="TimerLaser" type="Timer" parent="."]
@@ -35,6 +63,15 @@ position = Vector2(136, 12)
 
 [node name="Marker2D3" type="Marker2D" parent="LaserStartPosition"]
 position = Vector2(136, 28)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(44, 2)
+rotation = 1.5708
+emitting = false
+texture = ExtResource("3_gmlin")
+lifetime = 0.24
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_lvxji")
 
 [connection signal="timeout" from="TimerLaser" to="." method="_on_timer_laser_timeout"]
 [connection signal="timeout" from="TimerGrenade" to="." method="_on_timer_grenade_timeout"]
