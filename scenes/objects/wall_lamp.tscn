@@ -10,20 +10,23 @@ polygon = PackedVector2Array(-229, 43, -228, -24, 217, -23, 235, -20, 233, 45, 2
 
 [node name="WallLamp" type="StaticBody2D"]
 scale = Vector2(0.28, 0.28)
+collision_layer = 4
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+scale = Vector2(42.8, 5.76)
+shape = SubResource("CapsuleShape2D_56v88")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 scale = Vector2(42.8, 5.76)
-color = Color(0.85757, 0.889156, 1.92523e-06, 1)
-energy = 6.13
+color = Color(1, 0.392952, 0.209211, 1)
+energy = 10.05
 shadow_enabled = true
 shadow_filter = 1
-shadow_filter_smooth = 0.2
+shadow_filter_smooth = 0.3
 texture = ExtResource("2_l61tr")
 texture_scale = 1.57
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(42.8, 5.76)
-shape = SubResource("CapsuleShape2D_56v88")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(509, 155)

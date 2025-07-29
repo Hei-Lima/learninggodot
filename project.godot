@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Shooter"
-run/main_scene="uid://dn6fsxxdxvxcv"
+run/main_scene="uid://c718f50f3dh18"
 config/features=PackedStringArray("4.4", "Mobile")
 
 [display]

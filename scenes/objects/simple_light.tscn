@@ -10,9 +10,10 @@ height = 42.0
 polygon = PackedVector2Array(-30, -19, -75, -18, -87, -15, -95, -10, -100, 0, -99, 5, -93, 13, -82, 15, -78, 15, -78, -1, -73, -5, -9, -8, 8, -8, 74, -5, 76, 3, 76, 16, 88, 14, 97, 9, 101, 0, 95, -10, 87, -16, 76, -18, 0, -20)
 
 [node name="SimpleLight" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 scale = Vector2(9.96, 1)
 shape = SubResource("CapsuleShape2D_1uh05")
 

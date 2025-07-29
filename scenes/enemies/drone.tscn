@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b31iljv2id8co"]
 
-[ext_resource type="Script" uid="uid://doawhqfu61djk" path="res://scenes/objects/drone.gd" id="1_bcy7p"]
+[ext_resource type="Script" uid="uid://doawhqfu61djk" path="res://scenes/enemies/drone.gd" id="1_bcy7p"]
 [ext_resource type="Texture2D" uid="uid://c214cu8pk5eji" path="res://graphics/enemies/drone.png" id="1_hrrh7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bcy7p"]
