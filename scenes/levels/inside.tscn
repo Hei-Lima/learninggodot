@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bl0ylb7rq6viv"]
+[gd_scene load_steps=16 format=4 uid="uid://bl0ylb7rq6viv"]
 
 [ext_resource type="PackedScene" uid="uid://dn6fsxxdxvxcv" path="res://scenes/levels/level.tscn" id="1_8ht0b"]
 [ext_resource type="PackedScene" uid="uid://bbrbg0vmuvhud" path="res://scenes/objects/toilet.tscn" id="2_b1uqu"]
@@ -13,8 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://bfqpa61yhej76" path="res://graphics/lights/overlays/infrastructure.png" id="10_7r4nv"]
 [ext_resource type="Texture2D" uid="uid://cssybx2mhtwmm" path="res://graphics/lights/overlays/hole.png" id="11_4iit3"]
 [ext_resource type="Texture2D" uid="uid://bsfm5kfmxxqse" path="res://graphics/lights/overlays/lattice.png" id="12_jfm54"]
+[ext_resource type="PackedScene" uid="uid://cur7jylxncbcl" path="res://scenes/itens/item.tscn" id="14_jfm54"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4iit3"]
+size = Vector2(288.603, 520.291)
 
 [node name="Inside" instance=ExtResource("1_8ht0b")]
 script = ExtResource("2_n4crx")
@@ -41,12 +43,12 @@ scale = Vector2(-3.01975, -3.01975)
 position = Vector2(2130, 1019)
 rotation = -3.14159
 
-[node name="ExteriorWalls" type="TileMapLayer" parent="Ground" index="4"]
-tile_map_data = PackedByteArray("AAD9//z/AAADAAEAAAD9//v/AAADAAEAAAD9//r/AAADAAEAAAD9//n/AAADAAEAAAD9//j/AAADAAEAAAD9//f/AAADAAAAAAD+//f/AAAEAAAAAAD///f/AAAEAAAAAAAAAPf/AAAEAAAAAAABAPf/AAAEAAAAAAACAPf/AAAEAAAAAAADAPf/AAAEAAAAAAAEAPf/AAAEAAAAAAAFAPf/AAAEAAAAAAAGAPf/AAAEAAAAAAAHAPf/AAAEAAAAAAAIAPf/AAAEAAAAAAD9/wMAAAAEAAIAAAD+/wMAAAAEAAIAAAD//wMAAAAEAAIAAAAAAAMAAAAEAAIAAAABAAMAAAAEAAIAAAACAAMAAAAEAAIAAAADAAMAAAAEAAIAAAAEAAMAAAAEAAIAAAAFAAMAAAAEAAIAAAAGAAMAAAAEAAIAAAAHAAMAAAAEAAIAAAAIAAMAAAAEAAIAAAAJAAIAAAAFAAEAAAAJAAEAAAAFAAEAAAAJAAAAAAAFAAEAAAAJAP//AAAFAAEAAAAJAP7/AAAFAAEAAAAJAP3/AAAFAAEAAAAJAPz/AAAFAAEAAAAJAPv/AAAFAAEAAAAJAPr/AAAFAAEAAAAJAPn/AAAFAAEAAAAJAPj/AAAFAAEAAAAJAAMAAAAFAAIAAAAJAPf/AAAFAAAAAAD8//3/AAAEAAIAAAD8/wMAAAAEAAIAAAD9//3/AAAFAAIAAAD7//3/AAADAAAAAAD7//7/AAADAAEAAAD7////AAADAAEAAAD7/wAAAAAGAAIAAAD7/wEAAAADAAEAAAD7/wIAAAADAAEAAAD7/wMAAAADAAIAAAA=")
+[node name="InteriorWalls" type="TileMapLayer" parent="Ground" index="4"]
+tile_map_data = PackedByteArray("AAD+//3/AAAAAAYAAAD///3/AAAAAAYAAAAAAP3/AAAAAAYAAAAEAP3/AAAAAAYAAAABAP3/AAABAAgAAAABAPz/AAABAAYAAAABAPn/AAABAAYAAAADAP3/AAAAAAgAAAADAPz/AAABAAYAAAABAPj/AAABAAYAAAABAPf/AAAFAAYAAAD9//3/AAAAAAYAAAADAP//AAABAAYAAAADAAAAAAABAAYAAAADAAEAAAABAAYAAAADAAIAAAABAAYAAAADAAMAAAAFAAgAAAAFAP3/AAAAAAYAAAAGAP3/AAAAAAYAAAAHAP3/AAAAAAYAAAAIAP3/AAAAAAYAAAAJAP3/AAAGAAcAAAADAP7/AAAFAAYAAAAEAPr/AAAAAAYAAAAFAPr/AAAAAAYAAAAGAPr/AAAAAAYAAAAHAPr/AAAAAAYAAAAIAPr/AAAAAAYAAAAJAPr/AAAGAAcAAAADAPr/AAAAAAYAAAABAPr/AAAAAAgAAAABAPv/AAAFAAYAAAADAPv/AAAFAAYAAAA=")
 tile_set = ExtResource("3_n4crx")
 
-[node name="InteriorWalls" type="TileMapLayer" parent="Ground" index="5"]
-tile_map_data = PackedByteArray("AAD+//3/AAAAAAYAAAD///3/AAAAAAYAAAAAAP3/AAAAAAYAAAAEAP3/AAAAAAYAAAABAP3/AAABAAgAAAABAPz/AAABAAYAAAABAPn/AAABAAYAAAADAP3/AAAAAAgAAAADAPz/AAABAAYAAAABAPj/AAABAAYAAAABAPf/AAAFAAYAAAD9//3/AAAAAAYAAAADAP//AAABAAYAAAADAAAAAAABAAYAAAADAAEAAAABAAYAAAADAAIAAAABAAYAAAADAAMAAAAFAAgAAAAFAP3/AAAAAAYAAAAGAP3/AAAAAAYAAAAHAP3/AAAAAAYAAAAIAP3/AAAAAAYAAAAJAP3/AAAGAAcAAAADAP7/AAAFAAYAAAAEAPr/AAAAAAYAAAAFAPr/AAAAAAYAAAAGAPr/AAAAAAYAAAAHAPr/AAAAAAYAAAAIAPr/AAAAAAYAAAAJAPr/AAAGAAcAAAADAPr/AAAAAAYAAAABAPr/AAAAAAgAAAABAPv/AAAFAAYAAAADAPv/AAAFAAYAAAA=")
+[node name="ExteriorWalls" type="TileMapLayer" parent="Ground" index="5"]
+tile_map_data = PackedByteArray("AAD9//z/AAADAAEAAAD9//v/AAADAAEAAAD9//r/AAADAAEAAAD9//n/AAADAAEAAAD9//j/AAADAAEAAAD9//f/AAADAAAAAAD+//f/AAAEAAAAAAD///f/AAAEAAAAAAAAAPf/AAAEAAAAAAABAPf/AAAEAAAAAAACAPf/AAAEAAAAAAADAPf/AAAEAAAAAAAEAPf/AAAEAAAAAAAFAPf/AAAEAAAAAAAGAPf/AAAEAAAAAAAHAPf/AAAEAAAAAAAIAPf/AAAEAAAAAAD9/wMAAAAEAAIAAAD+/wMAAAAEAAIAAAD//wMAAAAEAAIAAAAAAAMAAAAEAAIAAAABAAMAAAAEAAIAAAACAAMAAAAEAAIAAAADAAMAAAAEAAIAAAAEAAMAAAAEAAIAAAAFAAMAAAAEAAIAAAAGAAMAAAAEAAIAAAAHAAMAAAAEAAIAAAAIAAMAAAAEAAIAAAAJAAIAAAAFAAEAAAAJAAEAAAAFAAEAAAAJAAAAAAAFAAEAAAAJAP//AAAFAAEAAAAJAP7/AAAFAAEAAAAJAP3/AAAFAAEAAAAJAPz/AAAFAAEAAAAJAPv/AAAFAAEAAAAJAPr/AAAFAAEAAAAJAPn/AAAFAAEAAAAJAPj/AAAFAAEAAAAJAAMAAAAFAAIAAAAJAPf/AAAFAAAAAAD8//3/AAAEAAIAAAD8/wMAAAAEAAIAAAD9//3/AAAFAAIAAAD7//3/AAADAAAAAAD7//7/AAADAAEAAAD7////AAADAAEAAAD7/wAAAAAGAAIAAAD7/wEAAAADAAEAAAD7/wIAAAADAAEAAAD7/wMAAAADAAIAAAA=")
 tile_set = ExtResource("3_n4crx")
 
 [node name="Objects" type="Node2D" parent="." index="1"]
@@ -75,11 +77,14 @@ color = Color(0.913725, 1, 1, 1)
 shadow_item_cull_mask = 0
 texture = ExtResource("8_4iit3")
 texture_scale = 3.0
+metadata/_edit_lock_ = true
 
 [node name="Lights" type="Node2D" parent="." index="4"]
 position = Vector2(-345, 1290)
 rotation = -3.14159
 scale = Vector2(0.28, 0.28)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
 
 [node name="WallLamp" parent="Lights" index="0" instance=ExtResource("7_6serm")]
 scale = Vector2(1, 1)
@@ -160,9 +165,13 @@ metadata/_edit_lock_ = true
 [node name="ExitGateArea" type="Area2D" parent="." index="6"]
 position = Vector2(-1741, 200)
 scale = Vector2(0.679135, -0.734205)
+collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitGateArea" index="0"]
-scale = Vector2(14.7712, -28.3241)
+position = Vector2(4.41748, 0)
 shape = SubResource("RectangleShape2D_4iit3")
+
+[node name="Item" parent="." index="8" instance=ExtResource("14_jfm54")]
+position = Vector2(422, 1192)
 
 [connection signal="body_entered" from="ExitGateArea" to="." method="_on_exit_gate_area_body_entered"]

@@ -14,6 +14,11 @@ config/name="Shooter"
 run/main_scene="uid://c718f50f3dh18"
 config/features=PackedStringArray("4.4", "Mobile")
 
+[autoload]
+
+Globals="*res://globals/globals.gd"
+TransitionLayer="*res://globals/transition_layer.tscn"
+
 [display]
 
 window/size/viewport_width=1280
