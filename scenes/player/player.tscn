@@ -29,7 +29,7 @@ scale_min = 0.5
 color = Color(0.72911, 0.999164, 0.905424, 0.694118)
 color_ramp = SubResource("GradientTexture1D_lvxji")
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Entity"]]
 collision_mask = 31
 script = ExtResource("1_gqjuk")
 

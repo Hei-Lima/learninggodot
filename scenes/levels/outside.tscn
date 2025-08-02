@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=4 uid="uid://c718f50f3dh18"]
+[gd_scene load_steps=22 format=4 uid="uid://c718f50f3dh18"]
 
 [ext_resource type="PackedScene" uid="uid://dn6fsxxdxvxcv" path="res://scenes/levels/level.tscn" id="1_2s4ok"]
 [ext_resource type="Script" uid="uid://dvw5gckcasknr" path="res://scenes/levels/outside.gd" id="2_qvsb0"]
@@ -15,6 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://bn7gxg2vspc77" path="res://scenes/objects/light_fan_animation.tscn" id="12_6u4a0"]
 [ext_resource type="PackedScene" uid="uid://c21kny32nw8e7" path="res://scenes/objects/gate.tscn" id="14_xqqjy"]
 [ext_resource type="PackedScene" uid="uid://cur7jylxncbcl" path="res://scenes/itens/item.tscn" id="15_ex6t8"]
+[ext_resource type="PackedScene" uid="uid://dv0qiy07dcw6a" path="res://scenes/objects/box.tscn" id="16_uaeil"]
+[ext_resource type="PackedScene" uid="uid://bbrbg0vmuvhud" path="res://scenes/objects/toilet.tscn" id="17_bjulg"]
+[ext_resource type="PackedScene" uid="uid://64mrwetmkfyd" path="res://scenes/enemies/scout.tscn" id="18_bjulg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oe17f"]
 resource_name = "walls"
@@ -52,6 +55,10 @@ sources/1 = SubResource("TileSetAtlasSource_lbwx5")
 
 [node name="Outside" instance=ExtResource("1_2s4ok")]
 script = ExtResource("2_qvsb0")
+
+[node name="Gate" parent="." index="1" instance=ExtResource("14_xqqjy")]
+z_index = 1
+position = Vector2(297, -1035)
 
 [node name="Soil" type="Sprite2D" parent="Ground" index="0"]
 texture_repeat = 2
@@ -107,12 +114,21 @@ position = Vector2(3436, 1580)
 scale = Vector2(0.708, 0.708)
 frame_progress = 0.594232
 
-[node name="Gate" parent="." index="1" instance=ExtResource("14_xqqjy")]
-position = Vector2(297, -1035)
+[node name="Box" parent="." index="3" instance=ExtResource("16_uaeil")]
+position = Vector2(973, 386)
 
-[node name="Player" parent="." index="3"]
+[node name="Toilet" parent="." index="4" instance=ExtResource("17_bjulg")]
+position = Vector2(-122, 367)
+
+[node name="Item" parent="." index="7" instance=ExtResource("15_ex6t8")]
+
+[node name="Scout" parent="Enemies" index="0" instance=ExtResource("18_bjulg")]
+position = Vector2(1568, 200)
+
+[node name="Player" parent="." index="9"]
+z_index = 2
 position = Vector2(282, -57)
 
-[node name="Item" parent="." index="5" instance=ExtResource("15_ex6t8")]
-
 [connection signal="player_entered_gate" from="Gate" to="." method="_on_gate_player_entered_gate"]
+[connection signal="player_enetered" from="Ground/House" to="." method="_on_house_player_enetered"]
+[connection signal="player_exited" from="Ground/House" to="." method="_on_house_player_exited"]

@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 signal laser(position, direction)
 signal grenade(position, direction)
-signal update_stats()
 
+var hit_count = 1
 var can_laser: bool = true
 var can_grenade: bool = true
 
@@ -15,6 +15,7 @@ func _process(_delta) -> void:
 	var direction = Input.get_vector("left", "right", "up", "down")
 	velocity = direction * speed
 	move_and_slide()
+	Globals.player_pos = global_position
 	
 	# Rotate
 	look_at(get_global_mouse_position())
@@ -43,6 +44,9 @@ func _on_timer_laser_timeout() -> void:
 
 func _on_timer_grenade_timeout() -> void:
 	can_grenade = true
+	
+func hit():
+	Globals.health -= 10
 
 	
 	
