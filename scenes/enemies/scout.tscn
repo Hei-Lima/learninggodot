@@ -1,16 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://64mrwetmkfyd"]
+[gd_scene load_steps=6 format=3 uid="uid://64mrwetmkfyd"]
 
 [ext_resource type="Texture2D" uid="uid://duix1rkovs24" path="res://graphics/enemies/scout.png" id="1_i70sm"]
 [ext_resource type="Script" uid="uid://b8k3uaay67snl" path="res://scenes/enemies/scout.gd" id="1_ns734"]
-[ext_resource type="Shader" uid="uid://mu046jwm45u3" path="res://scenes/enemies/scout.gdshader" id="2_08kc0"]
+[ext_resource type="Material" uid="uid://crjxhu1yfp3bq" path="res://scenes/enemies/scout.tres" id="2_08kc0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_08kc0"]
 radius = 405.36
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t8bpu"]
-shader = ExtResource("2_08kc0")
-shader_parameter/color = Color(0.996078, 0, 0, 1)
-shader_parameter/progress = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ns734"]
 
@@ -20,16 +15,16 @@ collision_mask = 11
 script = ExtResource("1_ns734")
 
 [node name="AttackArea" type="Area2D" parent="."]
-visible = false
 scale = Vector2(2.06614, 2.06614)
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+scale = Vector2(0.593444, 0.593444)
 shape = SubResource("CircleShape2D_08kc0")
 debug_color = Color(0.968627, 0, 0, 0.419608)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_t8bpu")
+material = ExtResource("2_08kc0")
 position = Vector2(39, 26)
 rotation = 1.5708
 texture = ExtResource("1_i70sm")
@@ -48,8 +43,10 @@ position = Vector2(113, -29)
 position = Vector2(117, 12)
 
 [node name="LaserCooldown" type="Timer" parent="."]
+wait_time = 0.5
 
 [node name="HitCooldown" type="Timer" parent="."]
+wait_time = 0.2
 one_shot = true
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
