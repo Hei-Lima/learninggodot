@@ -1,0 +1,168 @@
+[gd_scene load_steps=9 format=3 uid="uid://dw7uo01xuwha0"]
+
+[ext_resource type="Texture2D" uid="uid://ce7vqu341hj5f" path="res://graphics/car/main.png" id="1_q40b2"]
+[ext_resource type="Script" uid="uid://ciyhwdviwdp7p" path="res://scenes/enemies/car.gd" id="1_ytjck"]
+[ext_resource type="Texture2D" uid="uid://cmc0mtjctpcb2" path="res://graphics/car/turret.png" id="3_ld76f"]
+[ext_resource type="Texture2D" uid="uid://usmgwmyj3k33" path="res://graphics/explosions/gun.png" id="4_86l62"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_86l62"]
+
+[sub_resource type="Animation" id="Animation_86l62"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RayCast2D/Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Flare:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ld76f"]
+resource_name = "laser_load"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RayCast2D/Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 10.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RayCast2D2/Line2D:width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 10.0, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flare:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.89, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u7rmd"]
+_data = {
+&"RESET": SubResource("Animation_86l62"),
+&"laser_load": SubResource("Animation_ld76f")
+}
+
+[node name="Car" type="PathFollow2D"]
+script = ExtResource("1_ytjck")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+collision_layer = 2
+collision_mask = 11
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+polygon = PackedVector2Array(-156, -169, -98, -182, -34, -173, -23, -142, -28, -113, 6, -130, 65, -125, 68, -150, 73, -170, 126, -176, 175, -171, 187, -151, 185, -121, 160, -117, 160, -99, 186, -105, 197, -96, 213, -95, 215, -118, 195, -156, 206, -166, 233, -121, 235, -92, 249, -92, 255, -66, 239, -60, 240, -34, 250, -29, 250, 29, 239, 31, 238, 56, 249, 64, 251, 83, 245, 91, 233, 91, 235, 118, 210, 162, 198, 158, 214, 120, 215, 92, 190, 91, 181, 99, 161, 97, 156, 106, 181, 113, 184, 144, 175, 168, 70, 170, 65, 141, 68, 118, 9, 133, -37, 90, -58, 103, -28, 110, -25, 145, -32, 174, -164, 172, -170, 128, -157, 107, -137, 108, -138, 84, -167, 76, -172, 53, -207, 47, -229, 36, -235, -6, -233, -37, -213, -46, -182, -47, -164, -79, -138, -80, -147, -101, -168, -114, -170, -143)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(63, 0)
+rotation = 1.5708
+texture = ExtResource("1_q40b2")
+
+[node name="NoticeArea" type="Area2D" parent="."]
+scale = Vector2(0.799998, 0.799998)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NoticeArea"]
+scale = Vector2(77.9715, 77.9715)
+shape = SubResource("CircleShape2D_86l62")
+
+[node name="Turret" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Turret"]
+rotation = 1.5708
+texture = ExtResource("3_ld76f")
+
+[node name="RayCast2D" type="RayCast2D" parent="Turret"]
+position = Vector2(113, -28)
+target_position = Vector2(508, 0)
+
+[node name="Line2D" type="Line2D" parent="Turret/RayCast2D"]
+points = PackedVector2Array(0, 0, 502, 0)
+width = 1.0
+default_color = Color(1, 0.270588, 0.368627, 0.470588)
+
+[node name="RayCast2D2" type="RayCast2D" parent="Turret"]
+position = Vector2(112, 30)
+target_position = Vector2(510, 0)
+
+[node name="Line2D" type="Line2D" parent="Turret/RayCast2D2"]
+points = PackedVector2Array(0, 0)
+width = 0.0
+default_color = Color(1, 0.270588, 0.368627, 0.470588)
+
+[node name="Flare" type="Node2D" parent="Turret"]
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Turret/Flare"]
+position = Vector2(212, -31)
+rotation = 1.5708
+scale = Vector2(0.743333, 0.723313)
+texture = ExtResource("4_86l62")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Turret/Flare"]
+position = Vector2(211, 29)
+rotation = 1.5708
+scale = Vector2(0.743333, 0.723313)
+texture = ExtResource("4_86l62")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Turret")
+libraries = {
+&"": SubResource("AnimationLibrary_u7rmd")
+}
+
+[connection signal="body_entered" from="NoticeArea" to="." method="_on_notice_area_body_entered"]
+[connection signal="body_exited" from="NoticeArea" to="." method="_on_notice_area_body_exited"]

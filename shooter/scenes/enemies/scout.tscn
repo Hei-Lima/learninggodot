@@ -1,0 +1,55 @@
+[gd_scene load_steps=6 format=3 uid="uid://64mrwetmkfyd"]
+
+[ext_resource type="Texture2D" uid="uid://duix1rkovs24" path="res://graphics/enemies/scout.png" id="1_i70sm"]
+[ext_resource type="Script" uid="uid://b8k3uaay67snl" path="res://scenes/enemies/scout.gd" id="1_ns734"]
+[ext_resource type="Material" uid="uid://crjxhu1yfp3bq" path="res://scenes/enemies/scout.tres" id="2_08kc0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_08kc0"]
+radius = 405.36
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ns734"]
+
+[node name="Scout" type="CharacterBody2D" groups=["Entity", "Scouts"]]
+collision_layer = 2
+collision_mask = 15
+script = ExtResource("1_ns734")
+
+[node name="AttackArea" type="Area2D" parent="."]
+scale = Vector2(2.06614, 2.06614)
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+scale = Vector2(0.593444, 0.593444)
+shape = SubResource("CircleShape2D_08kc0")
+debug_color = Color(0.968627, 0, 0, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = ExtResource("2_08kc0")
+position = Vector2(39, 26)
+rotation = 1.5708
+texture = ExtResource("1_i70sm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6, 1)
+scale = Vector2(4.92, 4.92)
+shape = SubResource("CircleShape2D_ns734")
+
+[node name="LaserSpawnPositions" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="LaserSpawnPositions"]
+position = Vector2(113, -29)
+
+[node name="Marker2D2" type="Marker2D" parent="LaserSpawnPositions"]
+position = Vector2(117, 12)
+
+[node name="LaserCooldown" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="HitCooldown" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="body_exited" from="AttackArea" to="." method="_on_attack_area_body_exited"]
+[connection signal="timeout" from="LaserCooldown" to="." method="_on_laser_cooldown_timeout"]
+[connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]

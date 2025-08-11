@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://uufkjunq2wci"]
+
+[ext_resource type="Script" uid="uid://b8mepm2wb7iy0" path="res://ball.gd" id="1_1fffb"]
+[ext_resource type="Texture2D" uid="uid://dvqv2kc4mkdy3" path="res://ball.png" id="2_1v2ic"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1fffb"]
+friction = 0.0
+rough = true
+bounce = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_41u45"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1fffb"]
+lifetime_randomness = 0.05
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.0
+scale_max = 16.39
+
+[node name="Ball2" type="RigidBody2D" groups=["ball"]]
+collision_layer = 4
+physics_material_override = SubResource("PhysicsMaterial_1fffb")
+gravity_scale = 0.0
+linear_damp_mode = 1
+angular_damp_mode = 1
+script = ExtResource("1_1fffb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_41u45")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 25
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_1fffb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_1v2ic")
