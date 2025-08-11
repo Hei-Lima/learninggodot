@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://uufkjunq2wci"]
+[gd_scene load_steps=10 format=3 uid="uid://uufkjunq2wci"]
 
 [ext_resource type="Script" uid="uid://b8mepm2wb7iy0" path="res://ball.gd" id="1_1fffb"]
 [ext_resource type="Texture2D" uid="uid://dvqv2kc4mkdy3" path="res://ball.png" id="2_1v2ic"]
+[ext_resource type="Texture2D" uid="uid://c0hfftadc5kqw" path="res://white.png" id="2_ir12p"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1fffb"]
 friction = 0.0
@@ -10,12 +11,30 @@ bounce = 1.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_41u45"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1v2ic"]
+particles_animation = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_1v2ic"]
+colors = PackedColorArray(0, 1, 0, 0.760784, 0, 0.658824, 0, 0.356863)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ir12p"]
+gradient = SubResource("Gradient_1v2ic")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1fffb"]
 lifetime_randomness = 0.05
 particle_flag_disable_z = true
-gravity = Vector3(0, 98, 0)
-scale_min = 0.0
-scale_max = 16.39
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 1.7
+scale_over_velocity_min = 63.22
+scale_over_velocity_max = 63.22
+color = Color(0, 1, 0.215686, 0.223529)
+color_ramp = SubResource("GradientTexture1D_ir12p")
+anim_speed_max = 2.21
+anim_offset_max = 0.1954
 
 [node name="Ball2" type="RigidBody2D" groups=["ball"]]
 collision_layer = 4
@@ -25,14 +44,28 @@ linear_damp_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_1fffb")
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.0352941, 1, 0.34902, 1)
+energy = 0.5
+shadow_enabled = true
+texture = ExtResource("2_ir12p")
+texture_scale = 18.07
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_41u45")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-amount = 25
-lifetime = 0.5
+material = SubResource("CanvasItemMaterial_1v2ic")
+amount = 30
+texture = ExtResource("2_ir12p")
+lifetime = 0.1
+explosiveness = 0.11
+randomness = 0.14
 process_material = SubResource("ParticleProcessMaterial_1fffb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture = ExtResource("2_1v2ic")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder_light_mask = 2

@@ -31,7 +31,13 @@ func _on_timer_timeout() -> void:
 	var ball = get_tree().get_first_node_in_group("ball")
 	var target_y = ball.position.y
 	var dir_y = sign(target_y - $PaddleAI.position.y)
-	$PaddleAI.velocity = Vector2(0, dir_y * 500)
+	var dir = abs(target_y - $PaddleAI.position.y)
+	print(dir)
+	if dir > 50:
+		$PaddleAI.velocity = Vector2(0, dir_y * 500)
+	else:
+		$PaddleAI.velocity = Vector2(0, 0)
+
 
 func _on_red_area_body_entered(body: Node2D) -> void:
 	body.queue_free()

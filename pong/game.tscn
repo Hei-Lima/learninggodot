@@ -1,9 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://bc7d6oh21xj2r"]
+[gd_scene load_steps=9 format=3 uid="uid://bc7d6oh21xj2r"]
 
 [ext_resource type="Script" uid="uid://by5a01yo6y8fc" path="res://game.gd" id="1_e2o6t"]
 [ext_resource type="PackedScene" uid="uid://df0rre8a501ae" path="res://paddle.tscn" id="2_feb5d"]
 [ext_resource type="PackedScene" uid="uid://d0ufu8yku8o5q" path="res://paddle_ai.tscn" id="4_fc0e3"]
 [ext_resource type="PackedScene" uid="uid://bjwtofy6cyne2" path="res://control.tscn" id="5_7jktm"]
+
+[sub_resource type="Gradient" id="Gradient_fc0e3"]
+colors = PackedColorArray(0.389635, 0.405183, 0.593059, 1, 0, 0.12549, 0.203922, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7jktm"]
+gradient = SubResource("Gradient_fc0e3")
+fill_from = Vector2(0.110092, 0.90367)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
 size = Vector2(14.5, 23.5734)
@@ -14,10 +21,10 @@ size = Vector2(1194, 20)
 [node name="Game" type="Node2D"]
 script = ExtResource("1_e2o6t")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 1154.0
-offset_bottom = 669.0
-color = Color(0, 0, 0, 1)
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1155.0
+offset_bottom = 659.0
+texture = SubResource("GradientTexture2D_7jktm")
 
 [node name="PointAreas" type="Node2D" parent="."]
 
