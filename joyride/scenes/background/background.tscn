@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b8x8ucg4jdakg"]
+
+[node name="Background" type="ParallaxBackground"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
