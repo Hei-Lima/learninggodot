@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://cpa0vb5dlq6dn"]
+[gd_scene load_steps=5 format=3 uid="uid://cpa0vb5dlq6dn"]
 
-[ext_resource type="Script" uid="uid://cumb4r12nfw2v" path="res://scenes/scroll_controller.gd" id="2_w7c3h"]
 [ext_resource type="PackedScene" uid="uid://b8x8ucg4jdakg" path="res://scenes/background/background.tscn" id="2_w8frs"]
 [ext_resource type="Script" uid="uid://c04oqxy5bnr1c" path="res://scenes/misc/label.gd" id="3_w8frs"]
 [ext_resource type="PackedScene" uid="uid://djyda0k6pftbe" path="res://scenes/player.tscn" id="4_mx8sn"]
@@ -10,25 +9,7 @@ font_size = 30
 
 [node name="Node2D" type="Node2D"]
 
-[node name="ScrollController" type="Node2D" parent="."]
-position = Vector2(634, 361)
-script = ExtResource("2_w7c3h")
-
-[node name="Camera2D" type="Camera2D" parent="ScrollController"]
-scale = Vector2(-146.159, -0.122279)
-zoom = Vector2(1.135, 1.135)
-position_smoothing_enabled = true
-
 [node name="Background" parent="." instance=ExtResource("2_w8frs")]
-
-[node name="ScrollController2" type="Node2D" parent="."]
-position = Vector2(634, 361)
-script = ExtResource("2_w7c3h")
-
-[node name="Camera2D" type="Camera2D" parent="ScrollController2"]
-scale = Vector2(-146.159, -0.122279)
-zoom = Vector2(1.135, 1.135)
-position_smoothing_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -44,3 +25,11 @@ script = ExtResource("3_w8frs")
 
 [node name="Player" parent="." instance=ExtResource("4_mx8sn")]
 position = Vector2(207, 517)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(427, -156)
+rotation = 3.14159
+scale = Vector2(146.159, 0.122279)
+zoom = Vector2(1.135, 1.135)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
