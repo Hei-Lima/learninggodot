@@ -47,3 +47,9 @@ scroll_scale = Vector2(0, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Parallax/Parallax2D4/StaticBody2D"]
 position = Vector2(-77, 271.5)
 shape = SubResource("RectangleShape2D_rsf5d")
+
+[node name="ColorRect" type="ColorRect" parent="Parallax/Parallax2D4/StaticBody2D"]
+offset_left = -598.0
+offset_top = 208.0
+offset_right = 607.0
+offset_bottom = 348.0
