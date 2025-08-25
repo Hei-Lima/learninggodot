@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://du5ulwni4cuph"]
+
+[ext_resource type="Script" uid="uid://cbfnwpqjr6wtc" path="res://game_2p.gd" id="1_hf64h"]
+[ext_resource type="PackedScene" uid="uid://df0rre8a501ae" path="res://paddle.tscn" id="2_6w2pv"]
+[ext_resource type="PackedScene" uid="uid://bu0dm47dx1vwp" path="res://paddle_2.tscn" id="4_hf64h"]
+[ext_resource type="PackedScene" uid="uid://bjwtofy6cyne2" path="res://control.tscn" id="4_qf7ms"]
+
+[sub_resource type="Gradient" id="Gradient_fc0e3"]
+colors = PackedColorArray(0.389635, 0.405183, 0.593059, 1, 0, 0.12549, 0.203922, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7jktm"]
+gradient = SubResource("Gradient_fc0e3")
+fill_from = Vector2(0.110092, 0.90367)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc0e3"]
+size = Vector2(14.5, 23.5734)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
+size = Vector2(1194, 20)
+
+[node name="Game2P" type="Node2D"]
+script = ExtResource("1_hf64h")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1155.0
+offset_bottom = 659.0
+texture = SubResource("GradientTexture2D_7jktm")
+
+[node name="PointAreas" type="Node2D" parent="."]
+
+[node name="RedArea" type="Area2D" parent="PointAreas"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointAreas/RedArea"]
+position = Vector2(3.5, 326)
+scale = Vector2(1, 29.44)
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="BlueArea" type="Area2D" parent="PointAreas"]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PointAreas/BlueArea"]
+position = Vector2(1148.25, 334)
+scale = Vector2(1, 29.44)
+shape = SubResource("RectangleShape2D_fc0e3")
+
+[node name="Paddle" parent="." instance=ExtResource("2_6w2pv")]
+position = Vector2(10, 342)
+collision_mask = 3
+
+[node name="Walls" type="StaticBody2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls"]
+position = Vector2(597, -10)
+shape = SubResource("RectangleShape2D_feb5d")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls"]
+position = Vector2(570, 658.01)
+shape = SubResource("RectangleShape2D_feb5d")
+
+[node name="Control" parent="." instance=ExtResource("4_qf7ms")]
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Paddle2" parent="." instance=ExtResource("4_hf64h")]
+position = Vector2(1142, -1)
+
+[connection signal="body_entered" from="PointAreas/RedArea" to="." method="_on_red_area_body_entered"]
+[connection signal="body_entered" from="PointAreas/BlueArea" to="." method="_on_blue_area_body_entered"]

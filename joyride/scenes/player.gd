@@ -17,10 +17,16 @@ func _physics_process(delta: float) -> void:
 	
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		$AnimationPlayer.play("Falling")
+	else:
+		$AnimationPlayer.play("Running")
 	
 	if Input.is_action_pressed("Up"):
 		velocity.y -= jet_speed
+		$AnimationPlayer.play("Flying")
 	else:
 		velocity.y = move_toward(velocity.y, 0, jet_speed)
+		
+	$AnimationPlayer.speed_scale = (Globals.current_speed + 200) / 50
 		
 	move_and_slide()
