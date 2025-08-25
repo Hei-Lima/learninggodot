@@ -24,7 +24,7 @@ label_settings = SubResource("LabelSettings_mx8sn")
 script = ExtResource("3_w8frs")
 
 [node name="Player" parent="." instance=ExtResource("4_mx8sn")]
-position = Vector2(207, 517)
+position = Vector2(206, 503)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(427, -156)

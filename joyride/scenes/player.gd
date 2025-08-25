@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var initial_speed = 100
 @export var max_speed = 1000
-@export var increment = 0.9
+@export var increment = 0.9 
 @export var jet_speed = 100
 
 func _ready() -> void:
@@ -15,7 +15,7 @@ func _physics_process(delta: float) -> void:
 		Globals.current_speed = max_speed	
 	position.x += Globals.current_speed * delta
 	
-	if not is_on_floor():
+	if not is_on_floor():  
 		velocity += get_gravity() * delta
 		$AnimationPlayer.play("Falling")
 	else:
