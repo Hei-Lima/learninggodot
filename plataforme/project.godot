@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="plataforme"
-run/main_scene="uid://dsegqkj6ax03a"
+run/main_scene="uid://cgvl3hwhv3o4j"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
 [display]

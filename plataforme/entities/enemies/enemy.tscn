@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://b68xu36fy53iw"]
+
+[ext_resource type="Script" uid="uid://bek0qowgg6lq7" path="res://enemy.gd" id="1_owq46"]
+[ext_resource type="Texture2D" uid="uid://bup5r81yr8hpf" path="res://assets/tiles/tile_0322.png" id="3_msovg"]
+[ext_resource type="Texture2D" uid="uid://dye7pvq0lrqb7" path="res://assets/tiles/tile_0321.png" id="4_twyc1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wqcwe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_msovg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_twyc1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqcwe"]
+size = Vector2(10, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lf1o"]
+size = Vector2(10, 2)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_msovg"]
+size = Vector2(13.5, 8)
+
+[node name="Enemy" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 23
+script = ExtResource("1_owq46")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2.5)
+sprite_frames = SubResource("SpriteFrames_wqcwe")
+frame_progress = 0.746789
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wqcwe")
+
+[node name="CollisionTimer" type="Timer" parent="."]
+wait_time = 1000.0
+one_shot = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, -5)
+shape = SubResource("RectangleShape2D_5lf1o")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(-0.25, 0)
+shape = SubResource("RectangleShape2D_msovg")
+debug_color = Color(0.988235, 0, 0, 0.419608)
+
+[connection signal="timeout" from="CollisionTimer" to="." method="_on_collision_timer_timeout"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

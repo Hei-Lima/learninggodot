@@ -50,6 +50,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 scale = Vector2(2, 2)
+collision_mask = 4
 script = ExtResource("1_qly61")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
@@ -61,3 +62,8 @@ texture_filter = 1
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_ef06p")
 animation = &"jump"
+
+[node name="InvulnerabilityTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]
