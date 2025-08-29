@@ -13,7 +13,10 @@ config_version=5
 config/name="plataforme"
 run/main_scene="uid://dsegqkj6ax03a"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=1280
 
 [dotnet]
 

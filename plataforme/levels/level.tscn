@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://dsegqkj6ax03a"]
+[gd_scene load_steps=7 format=3 uid="uid://dsegqkj6ax03a"]
 
 [ext_resource type="Texture2D" uid="uid://bj1lupb475go1" path="res://assets/monochrome_tilemap_transparent_packed.png" id="1_80vhd"]
+[ext_resource type="Script" uid="uid://s68kogu2mwww" path="res://levels/level.gd" id="1_cwqvt"]
 [ext_resource type="PackedScene" uid="uid://bt1ib585p0a48" path="res://entities/player.tscn" id="2_hjsbj"]
+[ext_resource type="Script" uid="uid://jsb12h2x276v" path="res://levels/camera_2d.gd" id="4_5mrsh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hjsbj"]
 texture = ExtResource("1_80vhd")
@@ -437,17 +439,38 @@ physics_layer_0/collision_layer = 7
 sources/0 = SubResource("TileSetAtlasSource_hjsbj")
 
 [node name="Level" type="Node2D"]
-position = Vector2(231, 191)
-scale = Vector2(2.00183, 2.00183)
+script = ExtResource("1_cwqvt")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="Environment" type="Node2D" parent="."]
+scale = Vector2(2, 2)
+
+[node name="Background" type="CanvasLayer" parent="Environment"]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Environment/Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Environment"]
 texture_filter = 1
-tile_map_data = PackedByteArray("AAD9/wAAAAAIAAQAAAD+/wAAAAAIAAQAAAD//wAAAAAIAAQAAAAAAAAAAAAIAAQAAAABAAAAAAAIAAQAAAACAAAAAAAIAAQAAAADAAAAAAAIAAQAAAAEAAAAAAAIAAQAAAAFAAAAAAAIAAQAAAAGAAAAAAAIAAQAAAD8/wAAAAAIAAQAAAD7/wAAAAAIAAQAAAD6/wAAAAAIAAQAAAA=")
 tile_set = SubResource("TileSet_cwqvt")
 
 [node name="Player" parent="." instance=ExtResource("2_hjsbj")]
-position = Vector2(0, -7)
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(1.65, 1.65)
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(2, 2)
+offset = Vector2(100, -115)
+zoom = Vector2(1.975, 1.975)
+limit_smoothed = true
 position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("4_5mrsh")
+
+[node name="ChangeDirectionTimer" type="Timer" parent="Camera2D"]
+wait_time = 1.5
+
+[connection signal="timeout" from="Camera2D/ChangeDirectionTimer" to="Camera2D" method="_on_change_direction_timer_timeout"]

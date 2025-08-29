@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bt1ib585p0a48"]
+[gd_scene load_steps=9 format=3 uid="uid://bt1ib585p0a48"]
 
 [ext_resource type="Script" uid="uid://dyr3vfdvhib15" path="res://entities/player.gd" id="1_qly61"]
 [ext_resource type="Texture2D" uid="uid://coi7te3xmjqgm" path="res://assets/tiles/tile_0260.png" id="1_rfe5m"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://du1q5u5jgmupw" path="res://assets/tiles/tile_0261.png" id="2_qly61"]
 [ext_resource type="Texture2D" uid="uid://blsp5wh07qgsp" path="res://assets/tiles/tile_0262.png" id="3_qsoyl"]
 [ext_resource type="Texture2D" uid="uid://bf2n83a4e4nka" path="res://assets/tiles/tile_0263.png" id="4_6nm46"]
-[ext_resource type="Texture2D" uid="uid://eoxcx6aqpelx" path="res://assets/tiles/tile_0264.png" id="7_i623q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qly61"]
 size = Vector2(8, 9)
@@ -31,16 +30,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("3_qsoyl")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("2_qly61")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_qsoyl")
-}, {
-"duration": 1.0,
 "texture": ExtResource("4_6nm46")
-}, {
-"duration": 1.0,
-"texture": ExtResource("7_i623q")
 }],
 "loop": true,
 "name": &"walking",
@@ -48,6 +49,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+scale = Vector2(2, 2)
 script = ExtResource("1_qly61")
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
@@ -58,10 +60,4 @@ shape = SubResource("RectangleShape2D_qly61")
 texture_filter = 1
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_ef06p")
-animation = &"duck"
-frame_progress = 0.111159
-
-[node name="JumpTimer" type="Timer" parent="."]
-wait_time = 2.0
-
-[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
+animation = &"jump"
