@@ -19,26 +19,29 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqcwe"]
-size = Vector2(10, 8)
+size = Vector2(10, 10.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5lf1o"]
-size = Vector2(10, 2)
+size = Vector2(10, 2.4375)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_msovg"]
-size = Vector2(13.5, 8)
+size = Vector2(1.5, 11)
 
 [node name="Enemy" type="CharacterBody2D"]
-scale = Vector2(2, 2)
 collision_layer = 2
-collision_mask = 23
+collision_mask = 55
 script = ExtResource("1_owq46")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2.5)
+scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_wqcwe")
-frame_progress = 0.746789
+autoplay = "default"
+frame_progress = 0.072079
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2.5)
+scale = Vector2(2, 2)
 shape = SubResource("RectangleShape2D_wqcwe")
 
 [node name="CollisionTimer" type="Timer" parent="."]
@@ -46,17 +49,24 @@ wait_time = 1000.0
 one_shot = true
 
 [node name="Hurtbox" type="Area2D" parent="."]
+scale = Vector2(2, 2)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -5)
+position = Vector2(0, -6.28125)
 shape = SubResource("RectangleShape2D_5lf1o")
 
 [node name="Hitbox" type="Area2D" parent="."]
+scale = Vector2(2, 2)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-0.25, 0)
+position = Vector2(-4.5, 1.5)
+shape = SubResource("RectangleShape2D_msovg")
+debug_color = Color(0.988235, 0, 0, 0.419608)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(4.5, 1.5)
 shape = SubResource("RectangleShape2D_msovg")
 debug_color = Color(0.988235, 0, 0, 0.419608)
 

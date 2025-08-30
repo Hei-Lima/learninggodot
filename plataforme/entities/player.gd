@@ -30,15 +30,14 @@ func _physics_process(delta: float) -> void:
 		$PlayerSprite.play("idle")
 		velocity.x = move_toward(velocity.x, 0, slide_factor * delta)
 
-	# --- Jump normal ---
 	if Input.is_action_pressed("jump") and is_on_floor() and not Input.is_action_pressed("duck"):
 		is_jumping = true
 		velocity.y = -jump_speed
 		$PlayerSprite.play("jump")
 
 	if is_jumping and Input.is_action_just_released("jump") and velocity.y < 0:
-		velocity.y *= 0.5
 		is_jumping = false
+		velocity.y *= 0.5
 
 	# --- Bounce logic ---
 	if is_bouncing and Input.is_action_just_released("jump") and velocity.y < 0:
@@ -53,11 +52,19 @@ func _physics_process(delta: float) -> void:
 			$PlayerSprite.play("jump")
 
 	if is_on_floor():
-		floor_position = get_floor_position()
+		floor_position = get_floor_position() 
+	
+	if velocity.y == 0 or velocity.y > 0:
+		set_collision_mask_value(6, true)
 		is_jumping = false
 		is_bouncing = false
-
+	
+	if velocity.y < 0 or Input.is_action_pressed("duck"):
+		set_collision_mask_value(6, false)
+		
+	print(get_collision_mask_value(6))
 	move_and_slide()
+	Globals.player_pos = global_position
 
 # --- Bounce method ---
 func bounce(strength: int = 400) -> void:
@@ -68,17 +75,15 @@ func bounce(strength: int = 400) -> void:
 # --- Hit/invulnerable ---
 func hit():
 	if invulnerable:
-		print("Not hit")
+		print("Not hit") 
 		return
 
 	print("Player Hit!")
 	invulnerable = true
-	$InvulnerabilityTimer.start()
-	set_collision_mask_value(2, false)
+	$AnimationPlayer.play("hit")
 
-func _on_invulnerability_timer_timeout() -> void:
+func vulnerable() -> void:
 	invulnerable = false
-	set_collision_mask_value(2, true)
 
 # --- Get floor position ---
 func get_floor_position() -> Vector2:

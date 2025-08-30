@@ -4,6 +4,7 @@ var SPEED = 50
 var dir = 1
 var last_collsion_side
 
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -19,6 +20,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
 func get_collision():
 	for i in range(get_slide_collision_count()):
 		var col = get_slide_collision(i)
@@ -30,11 +32,24 @@ func get_collision():
 				return "right"
 	return null
 
+
+
 func _on_hurtbox_body_entered(body: Node2D) -> void:
-	body.bounce()
-	print("Death")
-	queue_free()
+	_process_collision(body, true)
+
 
 func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body.has_method("hit"):
-		body.hit()
+	_process_collision(body, false)
+
+
+func _process_collision(body: Node2D, is_hurtbox: bool) -> void:
+	if is_hurtbox and body.has_method("bounce") and not body.invulnerable:
+		body.bounce()
+		print("Death")
+		queue_free()
+		return
+	
+	if not is_hurtbox and is_inside_tree():
+		if body.has_method("hit"):
+			body.hit()
+			$CollisionTimer.start()

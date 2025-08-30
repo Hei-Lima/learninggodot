@@ -14,6 +14,10 @@ config/name="plataforme"
 run/main_scene="uid://cgvl3hwhv3o4j"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
+[autoload]
+
+Globals="*res://globals.gd"
+
 [display]
 
 window/size/viewport_width=1280
@@ -55,10 +59,15 @@ right={
 3d_render/layer_3="Objects"
 2d_render/layer_4="Areas and Items"
 3d_render/layer_4="Areas and Items"
+2d_render/layer_5="Enemies Invisible Wall"
+3d_render/layer_5="Enemies Invisible Wall"
+2d_render/layer_6="Passthru Plataforms"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Enemies"
 2d_physics/layer_3="Objects"
 2d_physics/layer_4="Items and Areas"
+2d_physics/layer_5="Enemies Invisible Wall"
+2d_physics/layer_6="Passthru Plataforms"
 
 [rendering]
 
