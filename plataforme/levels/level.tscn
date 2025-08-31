@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dsegqkj6ax03a"]
+[gd_scene load_steps=10 format=3 uid="uid://dsegqkj6ax03a"]
 
 [ext_resource type="Script" uid="uid://s68kogu2mwww" path="res://levels/level.gd" id="1_cwqvt"]
 [ext_resource type="TileSet" uid="uid://dukw3q4kkfnia" path="res://levels/tileset.tres" id="2_5mrsh"]
@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://bum7mqfwfrunm" path="res://levels/enemywall.tres" id="3_safpt"]
 [ext_resource type="Script" uid="uid://jsb12h2x276v" path="res://levels/camera_2d.gd" id="4_5mrsh"]
 [ext_resource type="Texture2D" uid="uid://bj1lupb475go1" path="res://assets/monochrome_tilemap_transparent_packed.png" id="4_gjl0y"]
+[ext_resource type="PackedScene" uid="uid://c8qex2aqxl8rn" path="res://ui/hud.tscn" id="7_vnv7o"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vnv7o"]
 texture = ExtResource("4_gjl0y")
@@ -520,6 +521,10 @@ tile_set = SubResource("TileSet_d5x7l")
 
 [node name="Enemies" type="Node2D" parent="Entities"]
 
+[node name="Itens" type="Node2D" parent="Entities"]
+
+[node name="Coins" type="Node2D" parent="Entities/Itens"]
+
 [node name="Player" parent="." instance=ExtResource("2_hjsbj")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -533,5 +538,7 @@ script = ExtResource("4_5mrsh")
 
 [node name="ChangeDirectionTimer" type="Timer" parent="Camera2D"]
 wait_time = 1.5
+
+[node name="Hud" parent="." instance=ExtResource("7_vnv7o")]
 
 [connection signal="timeout" from="Camera2D/ChangeDirectionTimer" to="Camera2D" method="_on_change_direction_timer_timeout"]

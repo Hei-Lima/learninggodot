@@ -1,10 +1,4 @@
-extends CharacterBody2D
-class_name Enemy
-
-var SPEED = 50
-var dir = 1
-var last_collsion_side
-
+extends Enemy
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

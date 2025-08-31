@@ -24,6 +24,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, dir * speed * 0.2, slide_factor * delta)
 	elif dir != 0:
 		$PlayerSprite.play("walking")
+		$PlayerSprite.speed_scale = abs(velocity.x) / speed
 		$PlayerSprite.flip_h = (dir < 0)
 		velocity.x = move_toward(velocity.x, dir * speed, slide_factor * delta)
 	else:
@@ -62,7 +63,6 @@ func _physics_process(delta: float) -> void:
 	if velocity.y < 0 or Input.is_action_pressed("duck"):
 		set_collision_mask_value(6, false)
 		
-	print(get_collision_mask_value(6))
 	move_and_slide()
 	Globals.player_pos = global_position
 

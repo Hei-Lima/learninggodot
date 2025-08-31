@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8qex2aqxl8rn"]
+
+[ext_resource type="Texture2D" uid="uid://bhmmaahj4tc2x" path="res://assets/tiles/tile_0240.png" id="1_276te"]
+[ext_resource type="Script" uid="uid://yq8ve31v5mwa" path="res://ui/hud.gd" id="1_546lt"]
+[ext_resource type="Texture2D" uid="uid://nbcrqmcolbfk" path="res://assets/tiles/tile_0002.png" id="1_rbyyf"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_546lt")
+
+[node name="HudControl" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HudControl"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health" type="HBoxContainer" parent="HudControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="Health" type="TextureRect" parent="HudControl/VBoxContainer/Health"]
+layout_mode = 2
+texture = ExtResource("1_276te")
+expand_mode = 3
+
+[node name="Health2" type="TextureRect" parent="HudControl/VBoxContainer/Health"]
+layout_mode = 2
+texture = ExtResource("1_276te")
+expand_mode = 3
+
+[node name="HealthCount" type="Label" parent="HudControl/VBoxContainer/Health"]
+layout_mode = 2
+
+[node name="Coins" type="HBoxContainer" parent="HudControl/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="HudControl/VBoxContainer/Coins"]
+layout_mode = 2
+texture = ExtResource("1_rbyyf")
+expand_mode = 3
+
+[node name="CoinsCount" type="Label" parent="HudControl/VBoxContainer/Coins"]
+layout_mode = 2
+text = "Coins: "
