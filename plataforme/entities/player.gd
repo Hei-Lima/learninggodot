@@ -10,6 +10,7 @@ var floor_position = Vector2.ZERO
 
 var is_jumping: bool = false
 var is_bouncing: bool = false
+var moving_plataform_increment: int = 0
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -26,10 +27,11 @@ func _physics_process(delta: float) -> void:
 		$PlayerSprite.play("walking")
 		$PlayerSprite.speed_scale = abs(velocity.x) / speed
 		$PlayerSprite.flip_h = (dir < 0)
-		velocity.x = move_toward(velocity.x, dir * speed, slide_factor * delta)
+		velocity.x = move_toward(velocity.x, (dir * speed) + moving_plataform_increment, slide_factor * delta)
 	else:
 		$PlayerSprite.play("idle")
-		velocity.x = move_toward(velocity.x, 0, slide_factor * delta)
+		velocity.x = move_toward(velocity.x, moving_plataform_increment, slide_factor * delta)
+		print(get_floor_velocity())
 
 	if Input.is_action_pressed("jump") and is_on_floor() and not Input.is_action_pressed("duck"):
 		is_jumping = true
@@ -92,3 +94,11 @@ func get_floor_position() -> Vector2:
 		if col and col.get_normal().dot(Vector2.UP) > 0.9:
 			return col.get_position()
 	return global_position
+	
+func get_floor_velocity() -> float:
+	for i in get_slide_collision_count():
+		var col = get_slide_collision(i)
+		var floor_velocity = col.get_collider().get("tile_velocity")
+		if col and col.get_normal().dot(Vector2.UP) > 0.9 and floor_velocity:
+			return floor_velocity
+	return 0.0

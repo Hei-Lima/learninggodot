@@ -1,5 +1,7 @@
 extends Path2D
 @export var follow:PathFollow2D
+@export var follow_tiles:TileMapLayer
+var tile_velocity
 
 @export var speed: float = 100.0
 var direction := 1
@@ -14,3 +16,5 @@ func _process(delta: float) -> void:
 		direction = -1
 	elif follow.progress_ratio <= 0.0:
 		direction = 1
+		
+	follow_tiles.tile_velocity = speed * direction
