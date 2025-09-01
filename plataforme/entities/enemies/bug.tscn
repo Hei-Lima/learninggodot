@@ -1,75 +1,62 @@
-[gd_scene load_steps=8 format=3 uid="uid://b68xu36fy53iw"]
+[gd_scene load_steps=10 format=3 uid="uid://bg77aqsf6bvol"]
 
-[ext_resource type="Script" uid="uid://bek0qowgg6lq7" path="res://entities/enemies/bug.gd" id="1_owq46"]
+[ext_resource type="Script" uid="uid://ckpvghk4h22d1" path="res://entities/enemies/bug.gd" id="1_owq46"]
+[ext_resource type="PackedScene" uid="uid://crvf28524rwqm" path="res://entities/enemies/enemy.tscn" id="1_yj5m3"]
 [ext_resource type="Texture2D" uid="uid://bup5r81yr8hpf" path="res://assets/tiles/tile_0322.png" id="3_msovg"]
 [ext_resource type="Texture2D" uid="uid://dye7pvq0lrqb7" path="res://assets/tiles/tile_0321.png" id="4_twyc1"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wqcwe"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_qxjww"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_msovg")
+"texture": ExtResource("4_twyc1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_twyc1")
+"texture": ExtResource("3_msovg")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqcwe"]
-size = Vector2(10, 10.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0bwo"]
+size = Vector2(10, 11)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5lf1o"]
-size = Vector2(10, 2.4375)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vlxiq"]
+size = Vector2(30, 6)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_msovg"]
-size = Vector2(1.5, 11)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ltnts"]
+size = Vector2(3, 22)
 
-[node name="Bug" type="CharacterBody2D"]
-collision_layer = 2
-collision_mask = 55
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tttsu"]
+size = Vector2(3, 22)
+
+[node name="Bug" instance=ExtResource("1_yj5m3")]
 script = ExtResource("1_owq46")
+starting_dir = 0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -2.5)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+position = Vector2(0, -5)
 scale = Vector2(2, 2)
-sprite_frames = SubResource("SpriteFrames_wqcwe")
+sprite_frames = SubResource("SpriteFrames_qxjww")
 autoplay = "default"
-frame_progress = 0.072079
+frame_progress = 0.925663
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 2.5)
-scale = Vector2(2, 2)
-shape = SubResource("RectangleShape2D_wqcwe")
+[node name="CollisionBox" parent="." index="1"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_y0bwo")
 
-[node name="CollisionTimer" type="Timer" parent="."]
-wait_time = 1000.0
-one_shot = true
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_vlxiq")
+debug_color = Color(0, 1, 0, 0.419608)
 
-[node name="Hurtbox" type="Area2D" parent="."]
-scale = Vector2(2, 2)
-collision_layer = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(-11.5, 0)
+shape = SubResource("RectangleShape2D_ltnts")
+debug_color = Color(1, 0, 0, 0.419608)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2(0, -6.28125)
-shape = SubResource("RectangleShape2D_5lf1o")
-
-[node name="Hitbox" type="Area2D" parent="."]
-scale = Vector2(2, 2)
-collision_layer = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(-4.5, 1.5)
-shape = SubResource("RectangleShape2D_msovg")
-debug_color = Color(0.988235, 0, 0, 0.419608)
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(4.5, 1.5)
-shape = SubResource("RectangleShape2D_msovg")
-debug_color = Color(0.988235, 0, 0, 0.419608)
-
-[connection signal="timeout" from="CollisionTimer" to="." method="_on_collision_timer_timeout"]
-[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hitbox" index="1"]
+position = Vector2(11.5, 0)
+shape = SubResource("RectangleShape2D_tttsu")
+debug_color = Color(1, 0, 0, 0.419608)

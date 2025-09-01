@@ -1,0 +1,61 @@
+[gd_scene load_steps=10 format=3 uid="uid://ednsw2w6hln2"]
+
+[ext_resource type="PackedScene" uid="uid://crvf28524rwqm" path="res://entities/enemies/enemy.tscn" id="1_8ftw2"]
+[ext_resource type="Script" uid="uid://bpnymgk5cv3ff" path="res://entities/enemies/helibug.gd" id="2_nldd7"]
+[ext_resource type="Texture2D" uid="uid://co5uleuu8ysg5" path="res://assets/tiles/tile_0380.png" id="3_be62o"]
+[ext_resource type="Texture2D" uid="uid://snjrw7polfw3" path="res://assets/tiles/tile_0381.png" id="4_hc21f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nldd7"]
+size = Vector2(10, 10)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yk2e3"]
+size = Vector2(30, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_be62o"]
+size = Vector2(3, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf3jb"]
+size = Vector2(3, 22)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gf3jb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_be62o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hc21f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Helibug" instance=ExtResource("1_8ftw2")]
+script = ExtResource("2_nldd7")
+starting_dir = 0
+
+[node name="CollisionBox" parent="." index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_nldd7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_yk2e3")
+debug_color = Color(0, 1, 0, 0.419608)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" index="0"]
+position = Vector2(-11.5, 0)
+shape = SubResource("RectangleShape2D_be62o")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Hitbox" index="1"]
+position = Vector2(11.5, 0)
+shape = SubResource("RectangleShape2D_gf3jb")
+debug_color = Color(1, 0, 0, 0.419608)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="3"]
+position = Vector2(0, -3)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_gf3jb")
+autoplay = "default"

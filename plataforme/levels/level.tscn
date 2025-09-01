@@ -517,6 +517,8 @@ tile_set = ExtResource("3_safpt")
 [node name="Passthru" type="TileMapLayer" parent="Environment/Tiles"]
 tile_set = SubResource("TileSet_d5x7l")
 
+[node name="Plataforms" type="Node2D" parent="Environment"]
+
 [node name="Entities" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="Entities"]

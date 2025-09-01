@@ -1,5 +1,11 @@
 extends Enemy
 
+enum direction {Left, Right} 
+@export var starting_dir = direction.Left
+
+func _ready() -> void:
+	dir = -1 if starting_dir == direction.Left else 1
+
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -14,37 +20,3 @@ func _physics_process(delta: float) -> void:
 			last_collsion_side = col
 
 	move_and_slide()
-
-
-func get_collision():
-	for i in range(get_slide_collision_count()):
-		var col = get_slide_collision(i)
-		if col:
-			var normal = col.get_normal()
-			if normal.dot(Vector2.LEFT) > 0.9:
-				return "left"
-			elif normal.dot(Vector2.RIGHT) > 0.9:
-				return "right"
-	return null
-
-
-
-func _on_hurtbox_body_entered(body: Node2D) -> void:
-	_process_collision(body, true)
-
-
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	_process_collision(body, false)
-
-
-func _process_collision(body: Node2D, is_hurtbox: bool) -> void:
-	if is_hurtbox and body.has_method("bounce") and body.velocity.y > 0:
-		body.bounce()
-		print("Death")
-		queue_free()
-		return
-	
-	if not is_hurtbox and is_inside_tree():
-		if body.has_method("hit"):
-			body.hit()
-			$CollisionTimer.start()
