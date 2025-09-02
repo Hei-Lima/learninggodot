@@ -29,7 +29,7 @@ project/assembly_name="plataforme"
 [global_group]
 
 player=""
-moving_plataform=""
+moving_platform=""
 
 [input]
 

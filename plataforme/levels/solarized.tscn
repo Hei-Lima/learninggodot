@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dsegqkj6ax03a" path="res://levels/level.tscn" id="1_enc2d"]
 [ext_resource type="PackedScene" uid="uid://bg77aqsf6bvol" path="res://entities/enemies/bug.tscn" id="2_6e06v"]
 [ext_resource type="PackedScene" uid="uid://djdbrjri7yxku" path="res://entities/plataforms/moving_plataform.tscn" id="2_518xk"]
-[ext_resource type="PackedScene" uid="uid://dgw5kahf81drf" path="res://entities/plataforms/plataform_tile.tscn" id="3_08l77"]
+[ext_resource type="PackedScene" path="res://entities/plataforms/plataform_tile.tscn" id="3_08l77"]
 [ext_resource type="PackedScene" uid="uid://ednsw2w6hln2" path="res://entities/enemies/helibug.tscn" id="3_orqa8"]
 [ext_resource type="PackedScene" uid="uid://y6325kjvo5bw" path="res://entities/items/coin.tscn" id="3_v1iag"]
 
@@ -50,12 +50,12 @@ curve = SubResource("Curve2D_518xk")
 follow = NodePath("PathFollow2D")
 follow_tiles = NodePath("PathFollow2D/PlataformTile")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Environment/Plataforms/MovingPlataform" index="0"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Environment/Plataforms/MovingPlataform" index="0" groups=["moving_platform"]]
 position = Vector2(-128, -48)
 rotates = false
 loop = false
 
-[node name="PlataformTile" parent="Environment/Plataforms/MovingPlataform/PathFollow2D" index="0" instance=ExtResource("3_08l77")]
+[node name="PlataformTile" parent="Environment/Plataforms/MovingPlataform/PathFollow2D" index="0" groups=["moving_platform"] instance=ExtResource("3_08l77")]
 tile_map_data = PackedByteArray("AAD+/wAAAAAEAAMAAAD//wAAAAAFAAMAAAAAAAAAAAAFAAMAAAABAAAAAAAGAAMAAAA=")
 
 [node name="MovingPlataform2" parent="Environment/Plataforms" index="1" node_paths=PackedStringArray("follow", "follow_tiles") instance=ExtResource("2_518xk")]
@@ -64,12 +64,12 @@ curve = SubResource("Curve2D_08l77")
 follow = NodePath("PathFollow2D")
 follow_tiles = NodePath("PathFollow2D/PlataformTile")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Environment/Plataforms/MovingPlataform2" index="0"]
+[node name="PathFollow2D" type="PathFollow2D" parent="Environment/Plataforms/MovingPlataform2" index="0" groups=["moving_platform"]]
 position = Vector2(-86.5, -48)
 rotates = false
 loop = false
 
-[node name="PlataformTile" parent="Environment/Plataforms/MovingPlataform2/PathFollow2D" index="0" instance=ExtResource("3_08l77")]
+[node name="PlataformTile" parent="Environment/Plataforms/MovingPlataform2/PathFollow2D" index="0" groups=["moving_platform"] instance=ExtResource("3_08l77")]
 tile_map_data = PackedByteArray("AAABAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAD//wAAAAAFAAMAAAD+/wAAAAAEAAMAAAA=")
 
 [node name="MovingPlataform3" parent="Environment/Plataforms" index="2" node_paths=PackedStringArray("follow", "follow_tiles") instance=ExtResource("2_518xk")]
@@ -83,7 +83,7 @@ position = Vector2(-86.5, -48)
 rotates = false
 loop = false
 
-[node name="PlataformTile" parent="Environment/Plataforms/MovingPlataform3/PathFollow2D" index="0" instance=ExtResource("3_08l77")]
+[node name="PlataformTile" parent="Environment/Plataforms/MovingPlataform3/PathFollow2D" index="0" groups=["moving_platform"] instance=ExtResource("3_08l77")]
 tile_map_data = PackedByteArray("AAABAAAAAAAGAAMAAAAAAAAAAAAFAAMAAAD//wAAAAAFAAMAAAD+/wAAAAAEAAMAAAA=")
 
 [node name="Enemies" parent="Entities" index="0"]
