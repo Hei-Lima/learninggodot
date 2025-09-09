@@ -29,7 +29,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		$PlayerSprite.play("idle")
 		velocity.x = move_toward(velocity.x, 0, slide_factor * delta)
-		print(get_floor_velocity())
 
 	if Input.is_action_pressed("jump") and is_on_floor() and not Input.is_action_pressed("duck"):
 		is_jumping = true
@@ -62,8 +61,7 @@ func _physics_process(delta: float) -> void:
 	
 	if velocity.y < 0 or Input.is_action_pressed("duck"):
 		set_collision_mask_value(6, false)
-		
-		
+			
 	move_and_slide()
 	Globals.player_pos = global_position
 

@@ -1,20 +1,29 @@
 extends Path2D
-@export var follow:PathFollow2D
-@export var follow_tiles:TileMapLayer
-var tile_velocity
+enum StartMode {
+	PLAYER_STANDING,
+	AUTOSTART
+}
 
+@export var animatable_body:AnimatableBody2D
 @export var speed: float = 100.0
+@export var mode: StartMode = StartMode.PLAYER_STANDING
+
 var direction := 1
 
-func _on_ready():
-	follow.rotates = false
+func _ready():
+	$PathFollow2D.rotates = false
+	$PathFollow2D/RemoteTransform2D.remote_path = animatable_body.get_path()
 
 func _process(delta: float) -> void:
-	follow.progress += speed * delta * direction
+	$PathFollow2D.progress += speed * delta * direction
 	
-	if follow.progress_ratio >= 1.0:
+	match mode:
+		mode == StartMode.AUTOSTART:
+			handle_autostart_mov()
+	
+
+func handle_autostart_mov():
+	if $PathFollow2D.progress_ratio >= 1.0:
 		direction = -1
-	elif follow.progress_ratio <= 0.0:
+	elif $PathFollow2D.progress_ratio <= 0.0:
 		direction = 1
-		
-	follow_tiles.tile_velocity = speed * direction

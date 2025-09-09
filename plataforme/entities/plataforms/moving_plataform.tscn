@@ -7,3 +7,10 @@
 [node name="MovingPlataform" type="Path2D"]
 curve = SubResource("Curve2D_s67ta")
 script = ExtResource("1_a7ipf")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(-86.5, -48)
+rotates = false
+loop = false
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="PathFollow2D"]

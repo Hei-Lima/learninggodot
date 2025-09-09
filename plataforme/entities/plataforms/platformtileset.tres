@@ -1,15 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsegqkj6ax03a"]
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cavi07ywyhff8"]
 
-[ext_resource type="Script" uid="uid://s68kogu2mwww" path="res://levels/level.gd" id="1_cwqvt"]
-[ext_resource type="TileSet" uid="uid://dukw3q4kkfnia" path="res://levels/tileset.tres" id="2_5mrsh"]
-[ext_resource type="PackedScene" uid="uid://bt1ib585p0a48" path="res://entities/player.tscn" id="2_hjsbj"]
-[ext_resource type="TileSet" uid="uid://bum7mqfwfrunm" path="res://levels/enemywall.tres" id="3_safpt"]
-[ext_resource type="Script" uid="uid://jsb12h2x276v" path="res://levels/camera_2d.gd" id="4_5mrsh"]
-[ext_resource type="Texture2D" uid="uid://bj1lupb475go1" path="res://assets/monochrome_tilemap_transparent_packed.png" id="4_gjl0y"]
-[ext_resource type="PackedScene" uid="uid://c8qex2aqxl8rn" path="res://ui/hud.tscn" id="7_vnv7o"]
+[ext_resource type="Texture2D" uid="uid://bj1lupb475go1" path="res://assets/monochrome_tilemap_transparent_packed.png" id="1_a7lqd"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vnv7o"]
-texture = ExtResource("4_gjl0y")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n7lcf"]
+texture = ExtResource("1_a7lqd")
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -477,74 +471,7 @@ texture = ExtResource("4_gjl0y")
 18:19/0 = 0
 19:19/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_d5x7l"]
-physics_layer_0/collision_layer = 32
-physics_layer_0/collision_mask = 7
-sources/0 = SubResource("TileSetAtlasSource_vnv7o")
-
-[node name="Level" type="Node2D"]
-texture_filter = 1
-script = ExtResource("1_cwqvt")
-
-[node name="Environment" type="Node2D" parent="."]
-scale = Vector2(2, 2)
-
-[node name="Background" type="CanvasLayer" parent="Environment"]
-layer = -1
-
-[node name="ColorRect" type="ColorRect" parent="Environment/Background"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Tiles" type="Node2D" parent="Environment"]
-
-[node name="Environment" type="TileMapLayer" parent="Environment/Tiles"]
-texture_filter = 1
-tile_set = ExtResource("2_5mrsh")
-
-[node name="Ground" type="TileMapLayer" parent="Environment/Tiles"]
-texture_filter = 1
-tile_set = ExtResource("2_5mrsh")
-
-[node name="InvisibleWall" type="TileMapLayer" parent="Environment/Tiles"]
-modulate = Color(1, 1, 1, 0)
-texture_filter = 1
-tile_set = ExtResource("2_5mrsh")
-
-[node name="EnemyWall" type="TileMapLayer" parent="Environment/Tiles"]
-tile_set = ExtResource("3_safpt")
-
-[node name="Passthru" type="TileMapLayer" parent="Environment/Tiles"]
-tile_set = SubResource("TileSet_d5x7l")
-
-[node name="Plataforms" type="Node2D" parent="Environment"]
-
-[node name="Entities" type="Node2D" parent="."]
-
-[node name="Enemies" type="Node2D" parent="Entities"]
-
-[node name="Itens" type="Node2D" parent="Entities"]
-
-[node name="Coins" type="Node2D" parent="Entities/Itens"]
-
-[node name="Player" parent="." instance=ExtResource("2_hjsbj")]
-
-[node name="Camera2D" type="Camera2D" parent="."]
-scale = Vector2(2, 2)
-offset = Vector2(100, -115)
-zoom = Vector2(1.975, 1.975)
-limit_smoothed = true
-position_smoothing_enabled = true
-position_smoothing_speed = 10.0
-script = ExtResource("4_5mrsh")
-
-[node name="ChangeDirectionTimer" type="Timer" parent="Camera2D"]
-wait_time = 1.5
-
-[node name="Hud" parent="." instance=ExtResource("7_vnv7o")]
-
-[connection signal="timeout" from="Camera2D/ChangeDirectionTimer" to="Camera2D" method="_on_change_direction_timer_timeout"]
+[resource]
+physics_layer_0/collision_layer = 0
+physics_layer_0/collision_mask = 0
+sources/0 = SubResource("TileSetAtlasSource_n7lcf")
