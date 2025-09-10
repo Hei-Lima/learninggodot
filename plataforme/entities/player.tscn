@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bt1ib585p0a48"]
+[gd_scene load_steps=17 format=3 uid="uid://bt1ib585p0a48"]
 
 [ext_resource type="Script" uid="uid://dyr3vfdvhib15" path="res://entities/player.gd" id="1_qly61"]
 [ext_resource type="Texture2D" uid="uid://coi7te3xmjqgm" path="res://assets/tiles/tile_0260.png" id="1_rfe5m"]
 [ext_resource type="Texture2D" uid="uid://bdqy5p7honva5" path="res://assets/tiles/tile_0266.png" id="2_6nm46"]
+[ext_resource type="Texture2D" uid="uid://c4wf1i41ufjke" path="res://assets/tiles/tile_0286.png" id="2_i623q"]
 [ext_resource type="Texture2D" uid="uid://du1q5u5jgmupw" path="res://assets/tiles/tile_0261.png" id="2_qly61"]
 [ext_resource type="Texture2D" uid="uid://blsp5wh07qgsp" path="res://assets/tiles/tile_0262.png" id="3_qsoyl"]
 [ext_resource type="Texture2D" uid="uid://bf2n83a4e4nka" path="res://assets/tiles/tile_0263.png" id="4_6nm46"]
@@ -12,6 +13,14 @@ size = Vector2(8, 9)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ef06p"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_i623q")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_6nm46")
@@ -74,6 +83,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [4]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlayerSprite:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CPUParticles2D:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_qsoyl"]
 resource_name = "hit"
@@ -117,11 +150,64 @@ tracks/2/keys = {
 "values": [13, 15]
 }
 
+[sub_resource type="Animation" id="Animation_ef06p"]
+resource_name = "death"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"death"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(2, 2.0001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i623q"]
 _data = {
 &"RESET": SubResource("Animation_6nm46"),
+&"death": SubResource("Animation_ef06p"),
 &"hit": SubResource("Animation_qsoyl")
 }
+
+[sub_resource type="Gradient" id="Gradient_tjdhl"]
+offsets = PackedFloat32Array(0, 0.564935)
+colors = PackedColorArray(1, 1, 1, 0.509804, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x08pd"]
+gradient = SubResource("Gradient_tjdhl")
+fill = 1
+fill_from = Vector2(0.504587, 0.504587)
+
+[sub_resource type="Gradient" id="Gradient_dchgp"]
+colors = PackedColorArray(0.33131, 0.401711, 0.505756, 1, 0.864675, 0.864675, 0.864675, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 4
@@ -137,7 +223,7 @@ texture_filter = 1
 position = Vector2(0, -5)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_ef06p")
-animation = &"jump"
+animation = &"death"
 
 [node name="InvulnerabilityTimer" type="Timer" parent="."]
 wait_time = 1.5
@@ -147,5 +233,26 @@ one_shot = true
 libraries = {
 &"": SubResource("AnimationLibrary_i623q")
 }
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 16
+texture = SubResource("GradientTexture2D_x08pd")
+lifetime = 2.0
+one_shot = true
+speed_scale = 0.2
+explosiveness = 0.13
+randomness = 0.21
+use_fixed_seed = true
+seed = 1997451381
+lifetime_randomness = 0.31
+direction = Vector2(4.78, -4.105)
+spread = 30.42
+gravity = Vector2(0, 0)
+initial_velocity_min = 70.42
+initial_velocity_max = 197.18
+color_ramp = SubResource("Gradient_dchgp")
+hue_variation_min = -0.11
+hue_variation_max = 0.51
 
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

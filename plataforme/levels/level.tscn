@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsegqkj6ax03a"]
+[gd_scene load_steps=14 format=3 uid="uid://dsegqkj6ax03a"]
 
 [ext_resource type="Script" uid="uid://s68kogu2mwww" path="res://levels/level.gd" id="1_cwqvt"]
 [ext_resource type="TileSet" uid="uid://dukw3q4kkfnia" path="res://levels/tileset.tres" id="2_5mrsh"]
@@ -482,6 +482,71 @@ physics_layer_0/collision_layer = 32
 physics_layer_0/collision_mask = 7
 sources/0 = SubResource("TileSetAtlasSource_vnv7o")
 
+[sub_resource type="Animation" id="Animation_vnv7o"]
+resource_name = "death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.975, 1.975), Vector2(4.5, 4.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(-0.0333333, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(100, -115), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_d5x7l"]
+resource_name = "normal"
+
+[sub_resource type="Animation" id="Animation_rtcij"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:zoom")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.975, 1.975)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100, -115)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d5x7l"]
+_data = {
+&"RESET": SubResource("Animation_rtcij"),
+&"death": SubResource("Animation_vnv7o"),
+&"normal": SubResource("Animation_d5x7l")
+}
+
 [node name="Level" type="Node2D"]
 texture_filter = 1
 script = ExtResource("1_cwqvt")
@@ -499,6 +564,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="Environment"]
+
+[node name="SkyLayer" type="ParallaxLayer" parent="Environment/ParallaxBackground"]
+scale = Vector2(2, 2)
+
+[node name="MontainLayer" type="ParallaxLayer" parent="Environment/ParallaxBackground"]
+scale = Vector2(2, 2)
+
+[node name="GroundLayer" type="ParallaxLayer" parent="Environment/ParallaxBackground"]
+scale = Vector2(2, 2)
 
 [node name="Tiles" type="Node2D" parent="Environment"]
 
@@ -544,6 +620,11 @@ script = ExtResource("4_5mrsh")
 
 [node name="ChangeDirectionTimer" type="Timer" parent="Camera2D"]
 wait_time = 1.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_d5x7l")
+}
 
 [node name="Hud" parent="." instance=ExtResource("7_vnv7o")]
 

@@ -2,6 +2,12 @@ extends Node
 
 var player_pos
 var coins_collected: int = 0
+var player_lives: int = 2:
+	set(value):
+		player_lives = value
+		emit_signal("lives_changed", player_lives)
+	
+signal lives_changed(new_value)
 signal coins_changed(new_value)
 
 func add_coin():

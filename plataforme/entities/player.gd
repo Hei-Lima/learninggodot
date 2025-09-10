@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var slide_factor: int = 900
 @export var jump_speed: int = 400
 @export var max_falling_speed: int = 400
+@export var camera: Camera2D
 
 var invulnerable: bool = false
 var floor_position = Vector2.ZERO
@@ -78,7 +79,10 @@ func hit():
 		return
 
 	print("Player Hit!")
+	Globals.player_lives -= 1
 	invulnerable = true
+	if Globals.player_lives == 0:
+		$AnimationPlayer.play("death")
 	$AnimationPlayer.play("hit")
 
 func vulnerable() -> void:
